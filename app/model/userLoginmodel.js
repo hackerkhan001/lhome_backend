@@ -5,8 +5,7 @@ const sequelize = require('../utilsFunction/dbFunctions'); // Adjust the path as
 
 const Login = sequelize.define('Login', {
   id: {
-    type: DataTypes.UUID,
-    defaultValue: Sequelize.UUIDV4,
+    type: DataTypes.STRING,
     allowNull: false,
     primaryKey: true,
   },

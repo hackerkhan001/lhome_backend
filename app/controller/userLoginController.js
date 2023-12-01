@@ -12,7 +12,7 @@ async function sendOTP(req, res) {
 
     // If the user doesn't exist, create a new record
     if (login) {
-      login = await Login.create({ number });
+      login = await Login.create({ id :login.id ,  number });
     }
     if (!login) {
         console.log('please register');
