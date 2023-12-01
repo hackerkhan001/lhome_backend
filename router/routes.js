@@ -1,6 +1,7 @@
 const express= require('express');
 const { registerUser } = require('../app/controller/RegistrationController');
 const { sendOTP, verifyOTPAndCreateSession } = require('../app/controller/userLoginController');
+const { updateIndex } = require('../app/controller/trendsController');
 const router = express.Router();
 
 router.get('/' , (req , res)=>{
@@ -15,6 +16,8 @@ router.post('/register' , registerUser);
 
 router.post('/signin' , sendOTP)
 
-router.post('/signin/auth' ,verifyOTPAndCreateSession )
+router.post('/signin/auth' ,verifyOTPAndCreateSession );
+
+router.post('/trend' , updateIndex)
 
 module.exports = router;

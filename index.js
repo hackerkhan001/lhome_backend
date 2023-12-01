@@ -3,6 +3,8 @@ const app = express();
 const routes = require('./router/routes')
 const cors = require('cors');
 const sequelize = require('./app/utilsFunction/dbFunctions');
+const Login = require('./app/model/userLoginmodel');
+const Trend = require('./app/model/trendingmodel');
 
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
@@ -20,6 +22,16 @@ sequelize.authenticate().then(()=>{
       console.error('Error synchronizing database:', error);
     }
   })();  
+
+  Login.hasOne(Trend , {
+    foreignKey: 'loginId', 
+    allowNull: false, 
+  });
+  Trend.belongsTo(Login , {
+    foreignKey: 'loginId',
+    allowNull: false, 
+  });
+
 
 app.use(routes);
 

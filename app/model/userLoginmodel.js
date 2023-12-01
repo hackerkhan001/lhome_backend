@@ -1,7 +1,8 @@
 const { Sequelize, DataTypes } = require('sequelize');
 const otpGenerator = require('otp-generator');
+const sequelize = require('../utilsFunction/dbFunctions'); 
 
-const sequelize = require('../utilsFunction/dbFunctions'); // Adjust the path as needed
+const Trend = require('./trendingmodel');
 
 const Login = sequelize.define('Login', {
   id: {
@@ -29,5 +30,6 @@ const Login = sequelize.define('Login', {
     },
   },
 });
+
 
 module.exports = Login;
