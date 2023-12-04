@@ -3,8 +3,9 @@ const sequelize = require('../utilsFunction/dbFunctions');
 
 const User = sequelize.define('User', {
     id: {
-        type: DataTypes.UUID,
-        defaultValue: Sequelize.UUIDV4,
+        type: DataTypes.BIGINT,
+        autoIncrement : true,
+        // defaultValue: Sequelize.UUIDV4,
         allowNull: false,
         primaryKey: true,
       },

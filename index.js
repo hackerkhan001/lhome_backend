@@ -3,8 +3,6 @@ const app = express();
 const routes = require('./router/routes')
 const cors = require('cors');
 const sequelize = require('./app/utilsFunction/dbFunctions');
-const Login = require('./app/model/userLoginmodel');
-const Trend = require('./app/model/trendingmodel');
 
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
@@ -23,18 +21,8 @@ sequelize.authenticate().then(()=>{
     }
   })();  
 
-  Login.hasOne(Trend , {
-    foreignKey: 'loginId', 
-    allowNull: false, 
-  });
-  Trend.belongsTo(Login , {
-    foreignKey: 'loginId',
-    allowNull: false, 
-  });
-
-
 app.use(routes);
 
-app.listen(8080 , ()=>{
-    console.log('server running on port 8080');
+app.listen(8000 , ()=>{
+    console.log('server running on port 8000');
 })

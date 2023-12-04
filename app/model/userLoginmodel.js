@@ -2,8 +2,6 @@ const { Sequelize, DataTypes } = require('sequelize');
 const otpGenerator = require('otp-generator');
 const sequelize = require('../utilsFunction/dbFunctions'); 
 
-const Trend = require('./trendingmodel');
-
 const Login = sequelize.define('Login', {
   id: {
     type: DataTypes.STRING,

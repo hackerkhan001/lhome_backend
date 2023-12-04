@@ -2,7 +2,7 @@ const { DataTypes } = require('sequelize');
 const sequelize = require('../utilsFunction/dbFunctions');
 const Login = require('./userLoginmodel'); // Correct the import statement
 
-const Trend = sequelize.define('Trend' , {
+const Wish = sequelize.define('Wish' , {
     id : {
         type : DataTypes.INTEGER ,
         primaryKey : true , 
@@ -11,10 +11,17 @@ const Trend = sequelize.define('Trend' , {
     },
     index : {
         type : DataTypes.BIGINT,
-        unique : true,
+        allowNull : false
+    },
+    loginId : {
+        type : DataTypes.STRING ,
+        allowNull : false ,
+    },
+    categoryId : {
+        type : DataTypes.STRING,
         allowNull : false
     }
 });
 
 
-module.exports = Trend;
+module.exports = Wish;
