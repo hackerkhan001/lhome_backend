@@ -2,6 +2,16 @@ const { Sequelize, DataTypes } = require('sequelize');
 const otpGenerator = require('otp-generator');
 const sequelize = require('../utilsFunction/dbFunctions'); 
 
+function generateNumericOTP(length) {
+  const digits = '0123456789';
+  let otp = '';
+  for (let i = 0; i < length; i++) {
+    const randomIndex = Math.floor(Math.random() * digits.length);
+    otp += digits.charAt(randomIndex);
+  }
+  return otp;
+}
+
 const Login = sequelize.define('Login', {
   id: {
     type: DataTypes.STRING,
@@ -24,7 +34,7 @@ const Login = sequelize.define('Login', {
   hooks: {
     beforeCreate: async (login) => {
       // Generate OTP before creating the record
-      login.otp = otpGenerator.generate(6, { digits: true, alphabets: false, upperCase: false, specialChars: false });
+      login.otp = generateNumericOTP(6);
     },
   },
 });
