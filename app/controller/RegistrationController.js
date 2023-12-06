@@ -1,6 +1,4 @@
-const User = require('../model/Registrationmodel'); // Import your User model
-const jwt = require('jsonwebtoken');
-const { generateSessionToken } = require('../utilsFunction/sessionProvider'); // Replace with the correct path
+const User = require('../model/Registrationmodel');
 
 async function registerUser(req, res) {
   try {
@@ -14,9 +12,8 @@ async function registerUser(req, res) {
       pincode,
     });
 
-    const sessionToken = generateSessionToken(newUser);
 
-    res.status(201).json({ user: newUser, token: sessionToken });
+    res.status(201).json({ user: newUser , msg : 'user created successfully' });
   } catch (error) {
     console.error('Error registering user:', error);
     res.status(500).json({ error });

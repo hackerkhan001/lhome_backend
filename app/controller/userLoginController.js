@@ -13,15 +13,14 @@ async function sendOTP(req, res) {
 
     if (login && !isexist) {
       login = await Login.create({ id :login.id ,  number });
-    console.log(`Sending OTP ${login ? login.otp : 'OTP not available'} to ${login ? login.number : 'N/A'}`);
+    // console.log(`Sending OTP ${login ? login.otp : 'OTP not available'} to ${login ? login.number : 'N/A'}`);
     res.status(200).json({ message: 'OTP sent successfully' });
     }else if(login && isexist){
       const deletePreviousRecord = await Login.destroy({where : { number }})
       login = await Login.create({ id :login.id ,  number });
-      console.log(`Sending OTP ${login ? login.otp : 'OTP not available'} to ${login ? login.number : 'N/A'}`);
+      // console.log(`Sending OTP ${login ? login.otp : 'OTP not available'} to ${login ? login.number : 'N/A'}`);
     }
     if (!login) {
-        console.log('please register');
         res.status(400).send('user not registered')
     }
 
