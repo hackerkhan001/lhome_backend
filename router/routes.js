@@ -3,6 +3,7 @@ const { registerUser } = require('../app/controller/RegistrationController');
 const { sendOTP, verifyOTPAndCreateSession } = require('../app/controller/userLoginController');
 const { updateWishlist, getAllWishes } = require('../app/controller/wishController');
 const { postIssue, getIssueList } = require('../app/controller/customerIssuesController');
+const { JoinusJob, getJoinusJob } = require('../app/controller/JoinusjobController');
 const router = express.Router();
 
 router.get('/' , (req , res)=>{
@@ -22,5 +23,9 @@ router.post('/wishes' , getAllWishes);
 router.post('/postissue' , postIssue);
 
 router.post('/fetchList' , getIssueList);
+
+router.post('/jobroleList', JoinusJob);
+
+router.post('/roleList', getJoinusJob);
 
 module.exports = router;
