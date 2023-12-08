@@ -5,7 +5,7 @@ const { updateWishlist, getAllWishes } = require('../app/controller/wishControll
 const { postIssue, getIssueList } = require('../app/controller/customerIssuesController');
 const { JoinusJob, getJoinusJob } = require('../app/controller/JoinusjobController');
 const router = express.Router();
-const {upload} = require('../helpers/filehelper');
+const {upload} = require('../app/helpers/filehelper');
 const {ResumeFileUpload,getallSingleFiles,userDetail,PortfolioFileUpload} = require('../app/controller/ApplyforjobController');
 router.get('/' , (req , res)=>{
     res.send('new project created')
