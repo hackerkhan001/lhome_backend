@@ -4,9 +4,10 @@ const { sendOTP, verifyOTPAndCreateSession } = require('../app/controller/userLo
 const { updateWishlist, getAllWishes } = require('../app/controller/wishController');
 const { postIssue, getIssueList } = require('../app/controller/customerIssuesController');
 const { JoinusJob, getJoinusJob } = require('../app/controller/JoinusjobController');
+const {applyForjob}=require('../app/controller/ApplyforjobController');
 const router = express.Router();
 const {upload} = require('../app/helpers/filehelper');
-const {ResumeFileUpload,getallSingleFiles,userDetail,PortfolioFileUpload} = require('../app/controller/ApplyforjobController');
+// const {ResumeFileUpload,getallSingleFiles,userDetail,PortfolioFileUpload} = require('../app/controller/ApplyforjobController');
 router.get('/' , (req , res)=>{
     res.send('new project created')
 });
@@ -29,13 +30,15 @@ router.post('/jobroleList', JoinusJob);
 
 router.post('/roleList', getJoinusJob);
 
-router.post('/resumeupload', upload.single('file'), ResumeFileUpload);
+router.post('/applyforjob',upload.single('file'),applyForjob)
 
-router.get('/getSingleFiles', getallSingleFiles);
+// router.post('/resumeupload', upload.single('file'), ResumeFileUpload);
 
-router.post('/userDetail',userDetail);
+// router.get('/getSingleFiles', getallSingleFiles);
 
-router.post('/portfolioFile', upload.single('file'), PortfolioFileUpload);
+// router.post('/userDetail',userDetail);
+
+// router.post('/portfolioFile', upload.single('file'), PortfolioFileUpload);
 
 
 module.exports = router;
