@@ -1,10 +1,12 @@
 const express= require('express');
+
 const { registerUser } = require('../app/controller/RegistrationController');
 const { sendOTP, verifyOTPAndCreateSession } = require('../app/controller/userLoginController');
 const { updateWishlist, getAllWishes } = require('../app/controller/wishController');
 const { postIssue, getIssueList } = require('../app/controller/customerIssuesController');
 const { JoinusJob, getJoinusJob } = require('../app/controller/JoinusjobController');
-const {applyForjob}=require('../app/controller/ApplyforjobController');
+const {createUser,getUserById} = require('../app/controller/ApplyforjobController');
+
 const router = express.Router();
 const {upload} = require('../app/helpers/filehelper');
 // const {ResumeFileUpload,getallSingleFiles,userDetail,PortfolioFileUpload} = require('../app/controller/ApplyforjobController');
@@ -30,7 +32,11 @@ router.post('/jobroleList', JoinusJob);
 
 router.post('/roleList', getJoinusJob);
 
-router.post('/applyforjob',upload.single('file'),applyForjob)
+router.post('/userdetail',upload.fields([
+    { name: 'portfolio', maxCount: 1 },
+    { name: 'resume', maxCount: 1 }]), createUser); 
+
+router.get('/userdetail/:userId',getUserById); 
 
 // router.post('/resumeupload', upload.single('file'), ResumeFileUpload);
 

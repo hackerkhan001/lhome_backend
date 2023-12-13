@@ -1,11 +1,20 @@
 'use strict';
 const multer = require('multer');
 const path = require('path');
+const rootDir = require('../utilsFunction/path');
+const portfolioDir = path.join(rootDir , 'uploads' , 'Portfolio');
+const resumesDir = path.join(rootDir , 'uploads' , 'resume');
 // var upload = multer({dest:'./upload/'});
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
-        cb(null, 'uploads');
+        if (file.fieldname === 'Portfolio') {          
+            cb(null, portfolioDir);
+          } else if (file.fieldname === 'resume') {
+            cb(null, resumesDir);
+          } else {
+            cb(new Error('Invalid field name'));
+          }
     },
     filename: (req, file, cb) => {
         cb(null, new Date().toISOString().replace(/:/g, '-') + '-' + file.originalname);

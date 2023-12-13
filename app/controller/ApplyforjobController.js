@@ -1,50 +1,46 @@
-const UserDetail= require('../model/Applyforjobmodel');
+const UserDetail = require('../model/Applyforjobmodel'); // Import your Sequelize model
 
-const applyForjob = async (req, res, next) => {
-    let fileModel;
-    let fileType;
-    try {
-        if (req.route.path === '/resume') {
-            const fileModel = ResumeUpload;
-            const fileType = 'Resume';
-        } else if (req.route.path === '/portfolio') {
-            const fileModel = PortfolioFile;
-            const fileType = 'Portfolio';
-        } else if (req.route.path === '/userdetail') {
-            const { firstname, lastname, email, mobile, currentctc, expectedctc, preferredlocation, noticeperiod,ResumeUpload,PortfolioFile } = req.body;
-
-            const newUser = await UserDetail.create({
-                firstname,
-                lastname,
-                email,
-                mobile,
-                currentctc,
-                expectedctc,
-                preferredlocation,
-                noticeperiod,
-                ResumeUpload,
-                PortfolioFile
-            });
-
-            return res.status(201).json({ userdetail: newUser, msg: 'Userdetail uploaded successfully' });
-        } else {
-            return res.status(400).send('Invalid request');
-        }
-
-        const file = new fileModel({
-            fileName: req.file.originalname,
-            filePath: req.file.path,
-            fileType: req.file.mimetype,
-            fileSize: fileSizeFormatter(req.file.size, 2) // 0.00
-        });
-
-        await file.save();
-        res.status(201).send(`${fileType} Uploaded Successfully`);
-    } catch (error) {
-        res.status(400).send(error.message);
-    }
+// Controller functions
+const createUser = async (req, res) => {
+  try {
+    const {firstName, lastName, email,phno,currentctc,expectedctc,location,nperiod } = req.body;
+    const { portfolio, resume } = req.files;
+    
+    const newUser = await UserDetail.create({
+      firstName,
+      lastName,
+      email,
+      phno,
+      currentctc,
+      expectedctc,
+      location,
+      nperiod,
+      portfolio: portfolio[0].filename,
+      resume: resume[0].filename,
+    });
+    // Create a new user based on the request body
+    // const newUser = await UserDetail.create(req.body);
+    return res.status(201).json({message: 'Userdetail Created Successfully',newUser});
+  } catch (error) {
+    return res.status(400).json({ error: error.message });
+  }
 };
 
+const getUserById = async (req, res) => {
+  const { userId } = req.body;
+  try {
+    const user = await UserDetail.findByPk(userId);
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+    return res.status(200).json(user);
+  } catch (error) {
+    return res.status(500).json({ error: error.message });
+  }
+};
+
+// Export controller functions
 module.exports = {
-    applyForjob
+  createUser,
+  getUserById,
 };
