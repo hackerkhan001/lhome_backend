@@ -8,7 +8,7 @@ const resumesDir = path.join(rootDir , 'uploads' , 'resume');
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
-        if (file.fieldname === 'Portfolio') {          
+        if (file.fieldname === 'portfolio') {          
             cb(null, portfolioDir);
           } else if (file.fieldname === 'resume') {
             cb(null, resumesDir);

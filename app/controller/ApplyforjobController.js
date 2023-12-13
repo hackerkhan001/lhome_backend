@@ -3,19 +3,19 @@ const UserDetail = require('../model/Applyforjobmodel'); // Import your Sequeliz
 // Controller functions
 const createUser = async (req, res) => {
   try {
-    const {firstName, lastName, email,phno,currentctc,expectedctc,location,nperiod } = req.body;
+    const {firstname, lastname, email,phno,currentctc,expectedctc,location,nperiod } = req.body;
     const { portfolio, resume } = req.files;
     
     const newUser = await UserDetail.create({
-      firstName,
-      lastName,
+      firstname,
+      lastname,
       email,
       phno,
       currentctc,
       expectedctc,
       location,
       nperiod,
-      portfolio: portfolio[0].filename,
+      Portfolio: portfolio[0].filename,
       resume: resume[0].filename,
     });
     // Create a new user based on the request body
