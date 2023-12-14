@@ -1,6 +1,6 @@
 const Designsession=require('../model/Designsessionmodel');
 
-async function DesignsessionBooking(req, res) {
+const DesignsessionBooking = async(req, res)=> {
     try {
       const { own, floorplan, location ,planning, looking, budget, Possession, nearestcentre, meetingdate,meetingtime } = req.body;
   

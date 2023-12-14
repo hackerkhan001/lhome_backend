@@ -3,40 +3,23 @@ const sequelize = require('../utilsFunction/dbFunctions');
 
 const UserDetail = sequelize.define('applyforjob', {
 
-    id: {
-        type: DataTypes.BIGINT,
-        autoIncrement : true,
-        // defaultValue: Sequelize.UUIDV4,
-        allowNull: false,
-        primaryKey: true,
-      },
-         resume:{
-          type: DataTypes.STRING,
-            allowNull: false,
-             fileName: {
-            type: DataTypes.STRING,
-            allowNull: false
-          },
-          filePath: {
-            type: DataTypes.STRING,
-            allowNull: false
-          },
-          fileType: {
-            type: DataTypes.STRING,
-            allowNull: false
-          },
-          fileSize: {
-            type: DataTypes.STRING,
-            allowNull: false
-        }
-    },
-    
-  firstname : {
+  id: {
+    type: DataTypes.BIGINT,
+    autoIncrement: true,
+    allowNull: false,
+    primaryKey: true,
+  },
+  resume: {
     type: DataTypes.STRING,
     allowNull: false,
   },
 
-  lastname : {
+  firstname: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+
+  lastname: {
     type: DataTypes.STRING,
     allowNull: false,
   },
@@ -44,63 +27,45 @@ const UserDetail = sequelize.define('applyforjob', {
   email: {
     type: DataTypes.STRING,
     allowNull: false,
-    unique: true,
     validate: {
       isEmail: true,
     },
   },
 
-  phno :{
-    type : DataTypes.BIGINT ,
-    allowNull: false ,
-    unique: true,
-    validate:{
-        is: /^[0-9]{10}$/i,
+  phno: {
+    type: DataTypes.BIGINT,
+    allowNull: false,
+    validate: {
+      is: /^[0-9]{10}$/i,
     }
   },
 
   currentctc: {
-    type : DataTypes.BIGINT,
-    allowNull : false ,
-  },
-
-  expectedctc: {
-    type : DataTypes.BIGINT,
-    allowNull : false ,
-  },
-
-  location : {
     type: DataTypes.STRING,
     allowNull: false,
   },
 
-  nperiod : {
-    type : DataTypes.BOOLEAN ,
-    defaultValue : false,
+  expectedctc: {
+    type: DataTypes.STRING,
+    allowNull: false,
   },
 
-  Portfolio:{
+  location: {
     type: DataTypes.STRING,
-            allowNull: false,
-             fileName: {
-            type: DataTypes.STRING,
-            allowNull: false
-          },
-          filePath: {
-            type: DataTypes.STRING,
-            allowNull: false
-          },
-          fileType: {
-            type: DataTypes.STRING,
-            allowNull: false
-          },
-          fileSize: {
-            type: DataTypes.STRING,
-            allowNull: false
-        }
-    }
-    
-  
+    allowNull: false,
+  },
+
+  nperiod: {
+    type: DataTypes.BOOLEAN,
+    defaultValue: false,
+  },
+
+  Portfolio: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  }
+
+
 
 });
 
