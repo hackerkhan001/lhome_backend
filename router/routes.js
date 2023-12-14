@@ -6,10 +6,10 @@ const { updateWishlist, getAllWishes } = require('../app/controller/wishControll
 const { postIssue, getIssueList } = require('../app/controller/customerIssuesController');
 const { JoinusJob, getJoinusJob } = require('../app/controller/JoinusjobController');
 const {createUser,getUserById} = require('../app/controller/ApplyforjobController');
-
+const {DesignsessionBooking}=require('../app/controller/DesignsessionController');
 const router = express.Router();
 const {upload} = require('../app/helpers/filehelper');
-// const {ResumeFileUpload,getallSingleFiles,userDetail,PortfolioFileUpload} = require('../app/controller/ApplyforjobController');
+
 router.get('/' , (req , res)=>{
     res.send('new project created')
 });
@@ -38,13 +38,7 @@ router.post('/userdetail',upload.fields([
 
 router.get('/userdetail/:userId',getUserById); 
 
-// router.post('/resumeupload', upload.single('file'), ResumeFileUpload);
-
-// router.get('/getSingleFiles', getallSingleFiles);
-
-// router.post('/userDetail',userDetail);
-
-// router.post('/portfolioFile', upload.single('file'), PortfolioFileUpload);
+router.post('/bookingsession',DesignsessionBooking);
 
 
 module.exports = router;
