@@ -18,29 +18,25 @@ const createUser = async (req, res) => {
       Portfolio: portfolio[0].filename,
       resume: resume[0].filename,
     });
-    // Create a new user based on the request body
-    // const newUser = await UserDetail.create(req.body);
     return res.status(201).json({message: 'Userdetail Created Successfully',newUser});
   } catch (error) {
     return res.status(400).json({ error: error.message });
   }
 };
 
-const getUserById = async (req, res) => {
-  const { userId } = req.params;
+const getUserdetail = async (req, res) => {
   try {
-    const user = await UserDetail.findByPk(userId);
-    if (!user) {
-      return res.status(404).json({ message: 'User not found' });
+    const userdetail = await UserDetail.findAll();
+    if (!userdetail) {
+      return res.status(404).json({ message: 'Userdetail not found' });
     }
-    return res.status(200).json(user);
+    return res.status(200).json({msg:"Userdetail list fetched successfully",Userdetail:userdetail});
   } catch (error) {
     return res.status(500).json({ error: error.message });
   }
 };
-
 // Export controller functions
 module.exports = {
   createUser,
-  getUserById,
+  getUserdetail,
 };
