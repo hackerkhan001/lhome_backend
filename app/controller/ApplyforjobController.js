@@ -27,7 +27,7 @@ const createUser = async (req, res) => {
 };
 
 const getUserById = async (req, res) => {
-  const { userId } = req.body;
+  const { userId } = req.params;
   try {
     const user = await UserDetail.findByPk(userId);
     if (!user) {

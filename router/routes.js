@@ -4,7 +4,7 @@ const { registerUser } = require('../app/controller/RegistrationController');
 const { sendOTP, verifyOTPAndCreateSession } = require('../app/controller/userLoginController');
 const { updateWishlist, getAllWishes } = require('../app/controller/wishController');
 const { postIssue, getIssueList } = require('../app/controller/customerIssuesController');
-const { JoinusJob, getJoinusJob } = require('../app/controller/JoinusjobController');
+const { JoinusJob, getJoinusJob, getJoinusJobById } = require('../app/controller/JoinusjobController');
 const {createUser,getUserById} = require('../app/controller/ApplyforjobController');
 const {DesignsessionBooking}=require('../app/controller/DesignsessionController');
 const router = express.Router();
@@ -31,6 +31,8 @@ router.post('/fetchList' , getIssueList);
 router.post('/jobroleList', JoinusJob);
 
 router.post('/roleList', getJoinusJob);
+
+router.get('/roleList/:id',getJoinusJobById);
 
 router.post('/userdetail',upload.fields([
     { name: 'portfolio', maxCount: 1 },
