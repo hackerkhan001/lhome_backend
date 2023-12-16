@@ -1,7 +1,7 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../utilsFunction/dbFunctions');
 
-const UserDetail = sequelize.define('applyforjob', {
+const UserDetail = sequelize.define('jobapplication', {
 
   id: {
     type: DataTypes.BIGINT,

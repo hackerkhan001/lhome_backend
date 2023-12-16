@@ -1,4 +1,4 @@
-const UserDetail = require('../model/Applyforjobmodel'); // Import your Sequelize model
+const UserDetail = require('../model/Jobapplicationmodel'); // Import your Sequelize model
 
 // Controller functions
 const createUser = async (req, res) => {
