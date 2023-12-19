@@ -1,7 +1,7 @@
 const { Sequelize, DataTypes } = require('sequelize');
 const sequelize = require('../utilsFunction/dbFunctions');
 
-const User = sequelize.define('User', {
+const User = sequelize.define('Lhome_User', {
     id: {
         type: DataTypes.BIGINT,
         autoIncrement : true,

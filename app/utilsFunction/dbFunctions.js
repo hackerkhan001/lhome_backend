@@ -8,7 +8,7 @@ const db_pwd = process.env.DB_PWD;
 
 const sequelize = new Sequelize(db_name , db_user , db_pwd , {
     host : db_host,
-    dialect : 'mysql'
+    dialect : 'postgres'
   });
 
 module.exports = sequelize;  
