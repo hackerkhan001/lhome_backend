@@ -1,7 +1,7 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../utilsFunction/dbFunctions');
 
-const UserDetail = sequelize.define('applyforjob', {
+const JobApplication = sequelize.define('jobapplication', {
 
   id: {
     type: DataTypes.BIGINT,
@@ -62,11 +62,8 @@ const UserDetail = sequelize.define('applyforjob', {
 
   Portfolio: {
     type: DataTypes.STRING,
-    allowNull: false,
+    allowNull: true,
   }
-
-
-
 });
 
-module.exports = UserDetail;
+module.exports = JobApplication;

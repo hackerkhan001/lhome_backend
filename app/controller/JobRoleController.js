@@ -1,6 +1,6 @@
 const Jobrole = require('../model/Joinusjobmodel');
 
-async function JoinusJob(req, res) {
+async function PostJobrole(req, res) {
     try {
         const { role, location, department, joblocation, Job_Description, Position_Title, Experience, Qualification, Job_type, Salary } = req.body;
 
@@ -41,7 +41,7 @@ async function JoinusJob(req, res) {
         res.status(500).json({ error });
     }
 }
-async function getJoinusJob(req , res){
+async function getJobRoleList(req , res){
     try{
         const JobroleList = await Jobrole.findAll();
         res.status(200).json({msg : "Jobrole list fetched successfully" ,data : JobroleList})
@@ -50,4 +50,16 @@ async function getJoinusJob(req , res){
         res.status(400).json({msg : 'error occured'})
     }
 }
-module.exports = { JoinusJob, getJoinusJob };
+const getJobRoleById = async (req, res) => {
+    const { id } = req.params;
+    try {
+      const user = await Jobrole.findByPk(id);
+      if (!user) {
+        return res.status(404).json({ message: 'Joblist not found' });
+      }
+      return res.status(200).json(user);
+    } catch (error) {
+      return res.status(500).json({ error: error.message });
+    }
+  };
+module.exports = { PostJobrole, getJobRoleList, getJobRoleById };

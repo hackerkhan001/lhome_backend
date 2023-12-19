@@ -4,8 +4,8 @@ const { registerUser } = require('../app/controller/RegistrationController');
 const { sendOTP, verifyOTPAndCreateSession } = require('../app/controller/userLoginController');
 const { updateWishlist, getAllWishes } = require('../app/controller/wishController');
 const { postIssue, getIssueList } = require('../app/controller/customerIssuesController');
-const { JoinusJob, getJoinusJob } = require('../app/controller/JoinusjobController');
-const {createUser,getUserById} = require('../app/controller/ApplyforjobController');
+const { PostJobrole, getJobRoleList, getJobRoleById } = require('../app/controller/JobRoleController');
+const { PostJobApplication, GetAllJobApplications } = require('../app/controller/JobapplicationController');
 const {DesignsessionBooking}=require('../app/controller/DesignsessionController');
 const router = express.Router();
 const {upload} = require('../app/helpers/filehelper');
@@ -28,15 +28,17 @@ router.post('/postissue' , postIssue);
 
 router.post('/fetchList' , getIssueList);
 
-router.post('/jobroleList', JoinusJob);
+router.post('/jobroleList', PostJobrole);
 
-router.post('/roleList', getJoinusJob);
+router.post('/roleList', getJobRoleList);
 
-router.post('/userdetail',upload.fields([
+router.get('/roleList/:id',getJobRoleById);
+
+router.post('/jobApplication',upload.fields([
     { name: 'portfolio', maxCount: 1 },
-    { name: 'resume', maxCount: 1 }]), createUser); 
+    { name: 'resume', maxCount: 1 }]), PostJobApplication); 
 
-router.get('/userdetail/:userId',getUserById); 
+router.get('/jobApplicationList',GetAllJobApplications); 
 
 router.post('/bookingsession',DesignsessionBooking);
 
