@@ -7,6 +7,7 @@ const { postIssue, getIssueList } = require('../app/controller/customerIssuesCon
 const { PostJobrole, getJobRoleList, getJobRoleById } = require('../app/controller/JobRoleController');
 const { PostJobApplication, GetAllJobApplications } = require('../app/controller/JobapplicationController');
 const {DesignsessionBooking}=require('../app/controller/DesignsessionController');
+const {ChatBotUser}=require('../app/controller/ChatBotUserDetailsController');
 const router = express.Router();
 const {upload} = require('../app/helpers/filehelper');
 
@@ -42,5 +43,6 @@ router.get('/jobApplicationList',GetAllJobApplications);
 
 router.post('/bookingsession',DesignsessionBooking);
 
+router.post('/chatbot',ChatBotUser);
 
 module.exports = router;
