@@ -10,7 +10,7 @@ const Wish = sequelize.define('Wish' , {
         autoIncrement : true,
     },
     index : {
-        type : DataTypes.BIGINT,
+        type : DataTypes.STRING,
         allowNull : false
     },
     loginId : {
