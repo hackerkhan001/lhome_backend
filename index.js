@@ -10,6 +10,7 @@ app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use(cors());
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+app.use(routes);
 
 
 sequelize.authenticate().then(()=>{
@@ -25,7 +26,6 @@ sequelize.authenticate().then(()=>{
     }
   })();  
 
-app.use(routes);
 
 app.listen(5000 , ()=>{
     console.log('server running on port 5000');
