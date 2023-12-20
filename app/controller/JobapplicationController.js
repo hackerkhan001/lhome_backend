@@ -15,7 +15,7 @@ const PostJobApplication = async (req, res) => {
       expectedctc,
       location,
       nperiod,
-      Portfolio: portfolio[0].filename || '',
+      Portfolio: portfolio[0].filename ?? '',
       resume: resume[0].filename,
     });
     return res.status(201).json({ message: 'JobApplication posted Successfully', newApplication });
