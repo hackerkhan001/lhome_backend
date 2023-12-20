@@ -1,7 +1,7 @@
 const express= require('express');
 
 const { registerUser } = require('../app/controller/RegistrationController');
-const { sendOTP, verifyOTPAndCreateSession } = require('../app/controller/userLoginController');
+const { sendOTP, verifyOTPAndCreateSession, resendOtp } = require('../app/controller/userLoginController');
 const { updateWishlist, getAllWishes } = require('../app/controller/wishController');
 const { postIssue, getIssueList } = require('../app/controller/customerIssuesController');
 const { PostJobrole, getJobRoleList, getJobRoleById } = require('../app/controller/JobRoleController');
@@ -18,6 +18,8 @@ router.get('/' , (req , res)=>{
 router.post('/register' , registerUser);
 
 router.post('/signin' , sendOTP);
+
+router.post('/resend' , resendOtp)
 
 router.post('/signin/auth' ,verifyOTPAndCreateSession );
 

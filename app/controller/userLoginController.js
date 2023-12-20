@@ -3,6 +3,7 @@ const User = require('../model/Registrationmodel');
 const jwt = require('jsonwebtoken');
 const otpGenerator = require('otp-generator');
 const { generateSessionToken } = require('../utilsFunction/sessionProvider');
+const { sendOTPasSMS } = require('../utilsFunction/otpSender');
 
 async function sendOTP(req, res) {
   const { number } = req.body;
@@ -13,12 +14,14 @@ async function sendOTP(req, res) {
 
     if (login && !isexist) {
       login = await Login.create({ id :login.id ,  number });
-    // console.log(`Sending OTP ${login ? login.otp : 'OTP not available'} to ${login ? login.number : 'N/A'}`);
+      // sendOTPasSMS(login.otp , login.number);
     res.status(200).json({ message: 'OTP sent successfully' });
     }else if(login && isexist){
       const deletePreviousRecord = await Login.destroy({where : { number }})
-      login = await Login.create({ id :login.id ,  number });
-      // console.log(`Sending OTP ${login ? login.otp : 'OTP not available'} to ${login ? login.number : 'N/A'}`);
+      if(deletePreviousRecord){
+        login = await Login.create({ id :login.id ,  number });
+        res.status(200).json({ message: 'OTP sent successfully' });
+      }
     }
     if (!login) {
         res.status(400).send('user not registered')
@@ -27,6 +30,17 @@ async function sendOTP(req, res) {
   } catch (error) {
     console.error('Error sending OTP:', error);
     res.status(500).json({ error: 'Internal Server Error' });
+  }
+}
+
+async function resendOtp(req , res){
+  const { number } = req.body;
+  let login = await Login.findOne({where : { number }});
+
+  if(login){
+    res.status(201).json({ message: `OTP ${login.otp} sent again to the ${number} `})
+  }else{
+    res.status(400).json({message: `There is an error with the entered ${number} . Please recheck your registration details`})
   }
 }
 
@@ -54,4 +68,4 @@ async function verifyOTPAndCreateSession(req, res) {
   }
 }
 
-module.exports = { sendOTP, verifyOTPAndCreateSession };
+module.exports = { sendOTP, resendOtp , verifyOTPAndCreateSession };
