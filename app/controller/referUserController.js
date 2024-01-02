@@ -7,6 +7,14 @@ const nodemailer = require('nodemailer');
 const postReferUser = async (req, res) => {
     const { userId, name, number, email, city } = req.body;
 
+    const user = await User.findOne({where : {id : userId}});
+    let userName;
+    if(user){
+        userName = user.name;
+    }else{
+        userName = 'Custom User'
+    }
+
 
     const transporter = nodemailer.createTransport({
         host: 'smtp.gmail.com',
@@ -20,7 +28,7 @@ const postReferUser = async (req, res) => {
         from: 'gskumarnellai@gmail.com',
         to: email,
         subject: 'Referral Link',
-        text: `Hello Mr.${userId} invited you to check this link: https://www.lhome.co.in/`,
+        text: `Hello Mr/Mrs.${name}, your friend Mr.${userName} invited you to check this link: https://www.lhome.co.in/`,
       };
       
 
