@@ -24,7 +24,6 @@ const ChatBotUserDetails = sequelize.define('ChatBotUserDetails', {
   number :{
     type : DataTypes.BIGINT ,
     allowNull: false ,
-    unique: true,
     validate:{
         is: /^[0-9]{10}$/i,
     }

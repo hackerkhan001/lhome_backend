@@ -10,6 +10,7 @@ const {DesignsessionBooking}=require('../app/controller/DesignsessionController'
 const {ChatBotUser}=require('../app/controller/ChatBotUserDetailsController');
 const router = express.Router();
 const {upload} = require('../app/helpers/filehelper');
+const { postReferUser } = require('../app/controller/referUserController');
 
 router.get('/' , (req , res)=>{
     res.send('new project created')
@@ -46,5 +47,7 @@ router.get('/jobApplicationList',GetAllJobApplications);
 router.post('/bookingsession',DesignsessionBooking);
 
 router.post('/chatbot',ChatBotUser);
+
+router.post('/referUser' , postReferUser)
 
 module.exports = router;

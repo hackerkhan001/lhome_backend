@@ -5,6 +5,13 @@ const PostJobApplication = async (req, res) => {
   try {
     const { firstname, lastname, email, phno, currentctc, expectedctc, location, nperiod } = req.body;
     const { portfolio, resume } = req.files;
+    let Portfolio;
+
+    if( Array.isArray(portfolio) && portfolio[0].filename){
+      Portfolio = portfolio[0].filename;
+    }else{
+      Portfolio = null
+    }
 
     const newApplication = await JobApplication.create({
       firstname,
@@ -15,7 +22,7 @@ const PostJobApplication = async (req, res) => {
       expectedctc,
       location,
       nperiod,
-      Portfolio: portfolio[0].filename ?? '',
+      Portfolio,
       resume: resume[0].filename,
     });
     return res.status(201).json({ message: 'JobApplication posted Successfully', newApplication });
